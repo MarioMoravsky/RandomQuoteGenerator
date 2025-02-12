@@ -65,7 +65,20 @@ const usedIndexes = new Set();
 const quoteElemnt = document.getElementById('quote');
 
 function generateQuote() {
-    const randomIndex = Math.floor(Math.random() * quotes.length);
-    const quote = quotes[randomIndex];
-    quoteElemnt.innerHTML = quote;
+    if(usedIndexes.size >= quotes.length) {
+        usedIndexes.clear();
+    }
+    while(true) {
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+
+        if(usedIndexes.has(randomIndex)) continue;
+
+        const quote = quotes[randomIndex];
+        quoteElemnt.innerHTML = quote;
+        usedIndexes.add(randomIndex);
+        break
+
+    }
+    
+    
 }
